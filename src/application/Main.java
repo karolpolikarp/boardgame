@@ -26,9 +26,9 @@ public class Main extends Application {
 
             GridPane grid = new GridPane();
 
-            for (int i = 0; i < 9; i++) {
+            for (int x = 0; x < 9; x++) {
                 for (int y = 0; y < 9; y++) {
-                    board.placeboard(i, y);
+                    board.placeboard(x, y);
                 }
             }
 

@@ -58,11 +58,11 @@ public class Board extends Pane {
                     board[x][y].setFill(Color.DEEPSKYBLUE);
             }
         }
-        System.out.println("Rozmiar listy to: "+ columnList.size()+rowList.size());
+        System.out.println("Rozmiar list to: "+ columnList.size()+ " x " +rowList.size());
         System.out.println("COORD X:" + columnList);
         System.out.println("COORD Y:" + rowList);
     }
-    public void placeboard(final int i, final int y){
-        getChildren().add(board[i][y]);
+    public void placeboard(final int x, final int y){
+        getChildren().add(board[x][y]);
     }
 }
