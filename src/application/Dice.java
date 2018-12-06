@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class Dice {
     private final Random rand;
+
     private final int faces;
 
     public Dice(int faces) {
@@ -12,5 +13,6 @@ public class Dice {
 
     public int roll() {
         return rand.nextInt(faces) + 1;
+
     }
 }

@@ -2,9 +2,11 @@ package application;
 
 import javafx.application.Application;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.StageStyle;
 
 
 public class Main extends Application {
@@ -25,10 +27,14 @@ public class Main extends Application {
                 grid.add(field.getShapeX(), field.getX(), field.getY());
             }
 
-            Scene scene = new Scene(grid, 451, 600);
+            Scene scene = new Scene(grid, (board.boardX * 50 + board.boardY * 2), 600);
             Button button = new Button("Click Me");
 
+
+
+
             primaryStage.setTitle("Roll and move!");
+            scene.setFill(Color.TRANSPARENT);
             primaryStage.setScene(scene);
             primaryStage.show();
 

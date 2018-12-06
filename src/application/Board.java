@@ -2,24 +2,20 @@ package application;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeType;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class Board extends Pane {
 
-    private int boardWidth = 9;
-    private int boardHeight = 9;
+    public int boardX = 9;
+    public int boardY = 9;
+
     private List<BoardField> fields = new LinkedList<>();
-    List columnList = new LinkedList();
-    List rowList = new LinkedList();
+    private List playableFields = new LinkedList<>();
 
-
-    private Rectangle[][] board;
+    Dice dice = new Dice(6);
+    int diceroll = dice.roll();
 
 
     public List<BoardField> getFields() {
@@ -27,13 +23,44 @@ public class Board extends Pane {
     }
 
     public Board() {
+//
+//        fields.add(new BoardField(0,0, Color.BLACK));
+//        fields.add(new BoardField(0,1, Color.BLUE));
+//        fields.add(new BoardField(1,1, Color.RED));
+//        fields.add(new BoardField(2,1, Color.YELLOW));
+//        fields.get(3).setUserOn(true);
 
-        fields.add(new BoardField(0,0, Color.BLACK));
-        fields.add(new BoardField(0,1, Color.BLUE));
-        fields.add(new BoardField(1,1, Color.RED));
-        fields.add(new BoardField(2,1, Color.YELLOW));
-        fields.get(3).setUserOn(true);
+        for (int x = 0; x < boardX; x++) {
+            for (int y = 0; y < boardY; y++) {
+                if (((x == 0 && y == 0))) {
+                    fields.add(new BoardField(x, y, Color.GREEN));
+                    playableFields.add(new BoardField(x,y, Color.GREEN));
+                } else if((((x == 8 && y == 8)))){
+                    fields.add(new BoardField(x, y, Color.RED));
+                    playableFields.add(new BoardField(x,y, Color.RED));
+                } else if ((((x % 2 == 0) || ((x == 1 && y == 8) || (x == 3 && y == 0))) || ((x == 5 && y == 8) || (x == 7 && y == 0)))) {
+                    fields.add(new BoardField(x, y, Color.WHEAT));
+                    playableFields.add(new BoardField(x,y, Color.WHEAT));
+                } else {
+                    fields.add(new BoardField(x, y, Color.DEEPSKYBLUE));
+                }
+            }
+        }
 
+        fields.get(diceroll).setUserOn(true);
+        System.out.println("You've rolled a " + diceroll + ".");
+        System.out.println(playableFields.size());
+
+        for ( int o = 0; o < playableFields.size(); o++) {
+            System.out.println(o + 1 + " " + playableFields.get(o));
+        }
+
+
+//        fields.get(0).setUserOn(true);
+//        fields.get(1).setUserOn(true);
+//        fields.get(2).setUserOn(true);
+//        fields.get(5).setUserOn(true);
+//        fields.get(9).setUserOn(true);
 //       /// board = new Rectangle[boardWidth][boardHeight];
 //
 //        for (int x = 0; x < boardWidth; x++) {
@@ -71,9 +98,9 @@ public class Board extends Pane {
 //        }
 //        System.out.println("Rozmiar list to: "+ columnList.size()+ " x " +rowList.size());
 //        System.out.println("COORD X:" + columnList);
-//        System.out.println("COORD Y:" + rowList);
-    }
-    public void placeboard(final int x, final int y){
-        getChildren().add(board[x][y]);
+////        System.out.println("COORD Y:" + rowList);
+////    }
+//    public void placeboard(final int x, final int y){
+//        getChildren().add(board[x][y]);
     }
 }
