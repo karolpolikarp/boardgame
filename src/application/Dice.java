@@ -11,7 +11,7 @@ public class Dice {
     }
 
     public int roll() {
-        return rand.nextInt(faces) + 1;
+        return (rand.nextInt(faces) + 1);
 
     }
 }

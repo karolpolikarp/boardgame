@@ -12,6 +12,7 @@ public class BoardField extends Pane {
     private int x;
     private int y;
     private Paint color;
+    private Paint originalColor;
     private boolean isUserOn = false;
     private boolean isSpecialTile = false;
     private Shape shapeX;
@@ -62,11 +63,11 @@ public class BoardField extends Pane {
         this.x = x;
         this.y = y;
         this.color = color;
+        this.originalColor = color;
         this.nextX = nextX;
         this.nextY = nextY;
         this.prevX = prevX;
         this.prevY = prevY;
-//        this.isSpecialTile = isSpecialTile;
         shapeX = new Rectangle(50, 50);
         shapeX.setFill(color);
         shapeX.setStroke(Color.BLACK);
@@ -87,6 +88,7 @@ public class BoardField extends Pane {
             shapeX.setStroke(Color.BLACK);
             shapeX.setStrokeType(StrokeType.OUTSIDE);
             shapeX.setStrokeWidth(1);
+            // get player and cause effect
         }else{
             shapeX = new Rectangle(50,50);
         }
@@ -95,9 +97,11 @@ public class BoardField extends Pane {
     public void setUserOn(boolean userOn) {
         isUserOn = userOn;
         if (isUserOn) {
-            shapeX = new Circle(25, Color.BLUEVIOLET);
+            shapeX = new Circle(25, Color.BLACK);
         }else{
-            shapeX = new Rectangle(50, 50);
+//            color = Color.WHEAT;
+//            backgroundFields.add(bf);
+            shapeX = new Rectangle(50, 50, originalColor);
         }
     }
 
