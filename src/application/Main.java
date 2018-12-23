@@ -1,5 +1,6 @@
 package application;
 
+import application.fields.BoardField;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,6 +19,7 @@ public class Main extends Application {
     private Button roll, setGame, newGame;
     private Label diceAmt;
     private Board board;
+    private BackgroundBoard backgroundBoard;
     private Stage stage;
     private GridPane grid;
     private VBox results;
@@ -35,6 +37,7 @@ public class Main extends Application {
         stage = primaryStage;
         primaryStage.setTitle("Roll and move!");
         board = new Board();
+        backgroundBoard = new BackgroundBoard();
 
         roll = new Button();
         roll.setText("ROLL");
@@ -96,8 +99,9 @@ public class Main extends Application {
         results = new VBox(10);
         border1.setCenter(results);
         Scene ns1 = new Scene(border1, (board.boardX * 50 + board.boardY * 2), 525);
-        boardRepaint();
         diceSetter();
+        boardRepaint();
+
         stage.setScene(ns1);
         stage.show();
         diceAmt.setText("You've rolled a " + diceRolled);
@@ -107,20 +111,28 @@ public class Main extends Application {
     private void boardRepaint() {
         grid = new GridPane();
         blankBoardRepaint();
-        //wysw fields
-        //wysl gracza
-//        setSpecialTiles(); zdefiniowane w polu
-        backgroundRepaint();
-
-        for (BoardField field : board.getFields()) {
-            grid.add(field.getShapeX(), field.getX(), field.getY());
-        }
         results.getChildren().addAll(grid, hbox1);
+        board.getFields().get(board.getPlayerPosition()).setUserOn(true);
+//        //wysw fields
+//        //wysl gracza
+////        setSpecialTiles(); zdefiniowane w polu
+//        backgroundRepaint();
     }
 
     private void blankBoardRepaint() {
-        for (BoardField blankField : board.getBlankFields()) {
-            grid.add(blankField.getShapeX(), blankField.getX(), blankField.getY());
+        backgroundBoard.generateBackgroundFields(); /// generuje drugi board pod pierszym
+        board.generateBoard();
+        board.getFields().get(board.getPlayerPosition()).setUserOn(true);
+        System.out.println(board.getFields());
+        System.out.println(backgroundBoard.getBackgroundFields()); /// generuje drugi board pod pierszym w gridzie
+        for (BoardField backgroundFields : backgroundBoard.getBackgroundFields()) {
+            grid.add(backgroundFields.getShapeX(), backgroundFields.getX(), backgroundFields.getY());
+        }
+        for (BoardField fields : board.getFields()) {
+            grid.add(fields.getShapeX(), fields.getX(), fields.getY());
+        }
+        for (BoardField blankFields : board.getBlankFields()) {
+            grid.add(blankFields.getShapeX(),  blankFields.getX(),  blankFields.getY());
         }
     }
     private void backgroundRepaint() {
@@ -128,11 +140,18 @@ public class Main extends Application {
             grid.add(backgroundField.getShapeX(), backgroundField.getX(), backgroundField.getY());
         }
     }
-    private void setSpecialTiles() {
-        board.getFields().get(5).setSpecialTile(true);
-        board.getFields().get(10).setSpecialTile(true);
-        board.getFields().get(22).setSpecialTile(true);
-        board.getFields().get(35).setSpecialTile(true);
-        board.getFields().get(43).setSpecialTile(true);
-    }
+////    private void setSpecialTiles() {
+////        board.getFields().get(5).setSpecialTile(true);
+////        board.getFields().get(10).setSpecialTile(true);
+////        board.getFields().get(22).setSpecialTile(true);
+////        board.getFields().get(35).setSpecialTile(true);
+////        board.getFields().get(43).setSpecialTile(true);
+//    }
+
+//    backgruound tiles to zle sa to sa stare blankftiles
+
+//    trzeba zrobi cala plasnze w petli wheat
+//
+//    lub sprawic aby kolo wyswietlalo sie na fiedldzie
+//            a  nie tworzoylo nowy rectanlgle i tam dawalo kolo pomysll
 }

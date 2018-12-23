@@ -1,5 +1,7 @@
 package application;
 
+import application.fields.BoardField;
+
 public class Player {
 
     Board board;
