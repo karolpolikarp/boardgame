@@ -2,6 +2,8 @@ package application;
 
 import application.fields.BackgroundField;
 import application.fields.BoardField;
+import application.fields.FinishField;
+import application.fields.StartField;
 import javafx.scene.paint.Color;
 
 import java.util.LinkedList;
@@ -41,6 +43,12 @@ public class BackgroundBoard extends Board {
 
     private List<BoardField> backgroundFields = new LinkedList<>();
 
+    public void generateBackgroundBoard(){
+        generateBackgroundFields();
+        generateBgFinishField();
+        generateBgStartField();
+    }
+
     public void generateBackgroundFields() {
         for (int x = 0; x < boardX; x++) {
             for (int y = 0; y < boardY; y++) {
@@ -48,19 +56,16 @@ public class BackgroundBoard extends Board {
                 backgroundFields.add(bf);
             }
         }
-        generateBgStartField();
-        generateBgFinishField();
-        System.out.println(backgroundFields.size());
     }
     public void generateBgStartField() {
-        BoardField bgStartField = new BackgroundField(0,0);
-        bgStartField.getShapeX().setFill(Color.GREEN);
+        BoardField bgStartField = new StartField(0,0);
+        backgroundFields.remove(0);
         backgroundFields.add(0, bgStartField);
     }
     public void generateBgFinishField() {
-        BoardField BfFinishField = new BackgroundField(8,8);
-        BfFinishField.getShapeX().setFill(Color.RED);
-        backgroundFields.add(82, BfFinishField);
+        BoardField bgFinishField = new FinishField(8,8);
+        backgroundFields.remove(80);
+        backgroundFields.add(80, bgFinishField);
     }
 //    public void generateBgSpecialField() {
 //        BoardField bfStartField = new BackgroundField(0,0);

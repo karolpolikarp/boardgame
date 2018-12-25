@@ -21,7 +21,7 @@ public class Main extends Application {
     private Board board;
     private BackgroundBoard backgroundBoard;
     private Stage stage;
-    private GridPane grid;
+    private GridPane grid,grid2;
     private VBox results;
     private HBox hbox1;
     private int diceRolled;
@@ -43,6 +43,7 @@ public class Main extends Application {
         roll.setText("ROLL");
         roll.setOnAction(e -> {
             displayDiceRoll();
+            System.out.println(board.getPlayerPosition());
         });
 
         setGame = new Button();
@@ -67,8 +68,8 @@ public class Main extends Application {
         results = new VBox(10);
         border1.setCenter(results);
         boardRepaint();
-        Scene ns = new Scene(border1, (board.boardX * 50 + board.boardY * 2), 525);
 
+        Scene ns = new Scene(border1, (board.boardX * 50 + board.boardY * 2), 525);
         primaryStage.setScene(ns);
         primaryStage.show();
 
@@ -77,7 +78,12 @@ public class Main extends Application {
 //        if (!alreadyRolled) {
 //        board.getFields().get(board.getPlayerPosition()).setUserOn(false);
         diceRolled = dice.roll();
-        board.setPlayerPosition(board.getPlayerPosition()+ diceRolled);
+        if (board.getPlayerPosition() < board.getMaxPlayerPosition()) {
+            board.setPlayerPosition(board.getPlayerPosition() + diceRolled);
+        } else {
+            board.setPlayerPosition(48);
+        }
+//        board.getFields().get(board.getPlayerPosition()).setUserOn(true);
 //        board.getFields().get(board.getPlayerPosition()).setUserOn(true); w boardrepaint
 
 //            alreadyRolled = true;
@@ -95,11 +101,11 @@ public class Main extends Application {
     }
 
     private void displayDiceRoll() {
+        diceSetter();
         BorderPane border1 = new BorderPane();
         results = new VBox(10);
         border1.setCenter(results);
         Scene ns1 = new Scene(border1, (board.boardX * 50 + board.boardY * 2), 525);
-        diceSetter();
         boardRepaint();
 
         stage.setScene(ns1);
@@ -109,18 +115,23 @@ public class Main extends Application {
     }
 
     private void boardRepaint() {
+        board.getFields().clear();
+        board.getBackgroundFields().clear();
+        backgroundBoard.getBackgroundFields().clear();
+        board.getBlankFields().clear();
         grid = new GridPane();
         blankBoardRepaint();
         results.getChildren().addAll(grid, hbox1);
-        board.getFields().get(board.getPlayerPosition()).setUserOn(true);
+        displayPlayer();
+        ///deletefieds
+
 //        //wysw fields
 //        //wysl gracza
 ////        setSpecialTiles(); zdefiniowane w polu
 //        backgroundRepaint();
     }
-
     private void blankBoardRepaint() {
-        backgroundBoard.generateBackgroundFields(); /// generuje drugi board pod pierszym
+        backgroundBoard.generateBackgroundBoard(); /// generuje drugi board pod pierszym
         board.generateBoard();
         board.getFields().get(board.getPlayerPosition()).setUserOn(true);
         System.out.println(board.getFields());
@@ -132,21 +143,12 @@ public class Main extends Application {
             grid.add(fields.getShapeX(), fields.getX(), fields.getY());
         }
         for (BoardField blankFields : board.getBlankFields()) {
-            grid.add(blankFields.getShapeX(),  blankFields.getX(),  blankFields.getY());
+            grid.add(blankFields.getShapeX(), blankFields.getX(), blankFields.getY());
         }
     }
-    private void backgroundRepaint() {
-        for (BoardField backgroundField : board.getBackgroundFields()) {
-            grid.add(backgroundField.getShapeX(), backgroundField.getX(), backgroundField.getY());
-        }
+    private void displayPlayer(){
+        board.getFields().get(board.getPlayerPosition()).setUserOn(true);
     }
-////    private void setSpecialTiles() {
-////        board.getFields().get(5).setSpecialTile(true);
-////        board.getFields().get(10).setSpecialTile(true);
-////        board.getFields().get(22).setSpecialTile(true);
-////        board.getFields().get(35).setSpecialTile(true);
-////        board.getFields().get(43).setSpecialTile(true);
-//    }
 
 //    backgruound tiles to zle sa to sa stare blankftiles
 

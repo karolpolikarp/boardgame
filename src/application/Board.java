@@ -10,9 +10,15 @@ public class Board extends Pane {
 
     public int boardX = 9;
     public int boardY = 9;
-    public int playerPosition = 0;
+    private int playerPosition = 0;
 
-    private List<BoardField> blankFields = new LinkedList<>();
+    public int getMaxPlayerPosition() {
+        return maxPlayerPosition;
+    }
+
+    private int maxPlayerPosition = 48;
+
+    public List<BoardField> blankFields = new LinkedList<>();
 
     public int getPlayerPosition() {
         return playerPosition;
@@ -21,7 +27,7 @@ public class Board extends Pane {
     public void setPlayerPosition(int playerPosition) {
         this.playerPosition = playerPosition;
     }
-    private List<BoardField> fields = new LinkedList<>();
+    public List<BoardField> fields = new LinkedList<>();
 
 
     public List<BoardField> getBackgroundFields() {
@@ -54,10 +60,6 @@ public class Board extends Pane {
     public void setBlankFields(List<BoardField> blankFields) {
         this.blankFields = blankFields;
     }
-
-    //    public Board() {
-//        generateStartField();
-//    }
     public void generateBlankFields() {
         BoardField bf1 = new BlankField(1, 0);
         BoardField bf2 = new BlankField(1, 1);
