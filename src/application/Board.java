@@ -11,6 +11,16 @@ public class Board extends Pane {
     public int boardX = 9;
     public int boardY = 9;
     private int playerPosition = 0;
+    private int computerPosition = 0;
+
+    public int getComputerPosition() {
+        return computerPosition;
+    }
+
+    public void setComputerPosition(int computerPosition) {
+        this.computerPosition = computerPosition;
+    }
+
 
     public int getMaxPlayerPosition() {
         return maxPlayerPosition;

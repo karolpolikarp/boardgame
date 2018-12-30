@@ -85,7 +85,7 @@ public class Main extends Application {
         }
 //        board.getFields().get(board.getPlayerPosition()).setUserOn(true);
 //        board.getFields().get(board.getPlayerPosition()).setUserOn(true); w boardrepaint
-
+//
 //            alreadyRolled = true;
 //        } else {
 ////            diceRolled = dice.roll() + diceRolled;
@@ -149,11 +149,4 @@ public class Main extends Application {
     private void displayPlayer(){
         board.getFields().get(board.getPlayerPosition()).setUserOn(true);
     }
-
-//    backgruound tiles to zle sa to sa stare blankftiles
-
-//    trzeba zrobi cala plasnze w petli wheat
-//
-//    lub sprawic aby kolo wyswietlalo sie na fiedldzie
-//            a  nie tworzoylo nowy rectanlgle i tam dawalo kolo pomysll
 }
