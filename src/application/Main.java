@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
+import java.awt.*;
+
 
 public class Main extends Application {
 
@@ -21,11 +23,10 @@ public class Main extends Application {
     private Board board;
     private BackgroundBoard backgroundBoard;
     private Stage stage;
-    private GridPane grid,grid2;
+    private GridPane grid;
     private VBox results;
     private HBox hbox1;
     private int diceRolled;
-    boolean alreadyRolled = false;
     Dice dice = new Dice(6);
 
     public static void main(String[] args) {
@@ -43,7 +44,6 @@ public class Main extends Application {
         roll.setText("ROLL");
         roll.setOnAction(e -> {
             displayDiceRoll();
-            System.out.println(board.getPlayerPosition());
         });
 
         setGame = new Button();
@@ -69,37 +69,23 @@ public class Main extends Application {
         border1.setCenter(results);
         boardRepaint();
 
-        Scene ns = new Scene(border1, (board.boardX * 50 + board.boardY * 2), 525);
-        primaryStage.setScene(ns);
+        Scene scene = new Scene(border1, (board.boardX * 50 + board.boardY * 2), 525);
+        primaryStage.setScene(scene);
         primaryStage.show();
-
     }
     private void diceSetter() {
-//        if (!alreadyRolled) {
-//        board.getFields().get(board.getPlayerPosition()).setUserOn(false);
         diceRolled = dice.roll();
         if (board.getPlayerPosition() < board.getMaxPlayerPosition()) {
             board.setPlayerPosition(board.getPlayerPosition() + diceRolled);
         } else {
             board.setPlayerPosition(48);
         }
-//        board.getFields().get(board.getPlayerPosition()).setUserOn(true);
-//        board.getFields().get(board.getPlayerPosition()).setUserOn(true); w boardrepaint
-//
-//            alreadyRolled = true;
-//        } else {
-////            diceRolled = dice.roll() + diceRolled;
-//            board.getFields().get(diceRolled).setUserOn(true);
-//        }
-//        alreadyRolled = true;
-//        } else {
-//            diceRolled = dice.roll();
-//            board.getFields().get(diceRolled).setUserOn(true);
-//            alreadyRolled = true;
-//            return diceRolled;
-//        }
+        if (board.getComputerPosition() < board.getMaxPlayerPosition()) {
+            board.setComputerPosition(board.getComputerPosition() + dice.roll());
+        } else {
+            board.setComputerPosition(48);
+        }
     }
-
     private void displayDiceRoll() {
         diceSetter();
         BorderPane border1 = new BorderPane();
@@ -111,7 +97,7 @@ public class Main extends Application {
         stage.setScene(ns1);
         stage.show();
         diceAmt.setText("You've rolled a " + diceRolled);
-//        System.out.println("You've rolled a " + diceSetter() + ".");
+        System.out.println("You've rolled a " + diceRolled + ".");
     }
 
     private void boardRepaint() {
@@ -119,23 +105,19 @@ public class Main extends Application {
         board.getBackgroundFields().clear();
         backgroundBoard.getBackgroundFields().clear();
         board.getBlankFields().clear();
-        grid = new GridPane();
-        blankBoardRepaint();
-        results.getChildren().addAll(grid, hbox1);
-        displayPlayer();
-        ///deletefieds
 
-//        //wysw fields
-//        //wysl gracza
-////        setSpecialTiles(); zdefiniowane w polu
-//        backgroundRepaint();
+        grid = new GridPane();
+        fieldsGenerator();
+        results.getChildren().addAll(grid, hbox1);
+        displayPlayers();
     }
-    private void blankBoardRepaint() {
-        backgroundBoard.generateBackgroundBoard(); /// generuje drugi board pod pierszym
+    private void fieldsGenerator() {
+        backgroundBoard.generateBackgroundBoard();
         board.generateBoard();
         board.getFields().get(board.getPlayerPosition()).setUserOn(true);
+        board.getFields().get(board.getComputerPosition()).setUserOn(true);
         System.out.println(board.getFields());
-        System.out.println(backgroundBoard.getBackgroundFields()); /// generuje drugi board pod pierszym w gridzie
+        System.out.println(backgroundBoard.getBackgroundFields());
         for (BoardField backgroundFields : backgroundBoard.getBackgroundFields()) {
             grid.add(backgroundFields.getShapeX(), backgroundFields.getX(), backgroundFields.getY());
         }
@@ -145,8 +127,12 @@ public class Main extends Application {
         for (BoardField blankFields : board.getBlankFields()) {
             grid.add(blankFields.getShapeX(), blankFields.getX(), blankFields.getY());
         }
+//        for (BoardField fields :board.getFields()){
+//            grid.add(fields.getShapeY(), fields.getX(), fields.getY());
+//        }
     }
-    private void displayPlayer(){
+    private void displayPlayers(){
         board.getFields().get(board.getPlayerPosition()).setUserOn(true);
+        board.getFields().get(board.getComputerPosition()).setUserOn(true);
     }
 }

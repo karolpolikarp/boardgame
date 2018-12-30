@@ -67,10 +67,5 @@ public class BackgroundBoard extends Board {
         backgroundFields.remove(80);
         backgroundFields.add(80, bgFinishField);
     }
-//    public void generateBgSpecialField() {
-//        BoardField bfStartField = new BackgroundField(0,0);
-//        bfStartField.getShapeX().setFill(Color.GREEN);
-//        backgroundFields.add(0, bfStartField);
-//    }
 }
 
