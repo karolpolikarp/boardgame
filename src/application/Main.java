@@ -4,17 +4,18 @@ import application.fields.BoardField;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-
-import java.awt.*;
-
+import javafx.scene.paint.Color;
 
 public class Main extends Application {
 
@@ -99,7 +100,6 @@ public class Main extends Application {
         diceAmt.setText("You've rolled a " + diceRolled);
         System.out.println("You've rolled a " + diceRolled + ".");
     }
-
     private void boardRepaint() {
         board.getFields().clear();
         board.getBackgroundFields().clear();
@@ -129,7 +129,7 @@ public class Main extends Application {
         }
 //        for (BoardField fields :board.getFields()){
 //            grid.add(fields.getShapeY(), fields.getX(), fields.getY());
-//        }
+//        } wyswietlanie figury Y na polu (np. napis lub inny kształt)
     }
     private void displayPlayers(){
         board.getFields().get(board.getPlayerPosition()).setUserOn(true);

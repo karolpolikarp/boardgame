@@ -4,51 +4,25 @@ import application.fields.BackgroundField;
 import application.fields.BoardField;
 import application.fields.FinishField;
 import application.fields.StartField;
-import javafx.scene.paint.Color;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class BackgroundBoard extends Board {
-
-    @Override
-    public int getBoardX() {
-        return boardX;
-    }
-
-    @Override
-    public void setBoardX(int boardX) {
-        this.boardX = boardX;
-    }
-
-    public int getBoardY() {
-        return boardY;
-    }
-
-    public void setBoardY(int boardY) {
-        this.boardY = boardY;
-    }
-
     @Override
     public List<BoardField> getBackgroundFields() {
         return backgroundFields;
     }
-
-    public void setBackgroundFields(List<BoardField> backgroundFields) {
-        this.backgroundFields = backgroundFields;
-    }
+    private List<BoardField> backgroundFields = new LinkedList<>();
 
     public int boardX = 9;
     public int boardY = 9;
-
-    private List<BoardField> backgroundFields = new LinkedList<>();
 
     public void generateBackgroundBoard(){
         generateBackgroundFields();
         generateBgFinishField();
         generateBgStartField();
     }
-
     public void generateBackgroundFields() {
         for (int x = 0; x < boardX; x++) {
             for (int y = 0; y < boardY; y++) {
@@ -68,4 +42,3 @@ public class BackgroundBoard extends Board {
         backgroundFields.add(80, bgFinishField);
     }
 }
-

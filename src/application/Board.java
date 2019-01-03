@@ -10,66 +10,39 @@ public class Board extends Pane {
 
     public int boardX = 9;
     public int boardY = 9;
+
     private int playerPosition = 0;
     private int computerPosition = 0;
-
-    public int getComputerPosition() {
-        return computerPosition;
-    }
-
-    public void setComputerPosition(int computerPosition) {
-        this.computerPosition = computerPosition;
-    }
-
-
-    public int getMaxPlayerPosition() {
-        return maxPlayerPosition;
-    }
-
     private int maxPlayerPosition = 48;
 
-    public List<BoardField> blankFields = new LinkedList<>();
-
-    public int getPlayerPosition() {
-        return playerPosition;
-    }
-
-    public void setPlayerPosition(int playerPosition) {
-        this.playerPosition = playerPosition;
-    }
     public List<BoardField> fields = new LinkedList<>();
-
+    public List<BoardField> blankFields = new LinkedList<>();
 
     public List<BoardField> getBackgroundFields() {
         return blankFields;
     }
-
     public List<BoardField> getBlankFields() {
         return blankFields;
     }
-
-    public void setPlayableFields(List playableFields) {
-        this.blankFields = blankFields;
-    }
-
     public List<BoardField> getFields() {
         return fields;
     }
-    public int getBoardX() {
-        return boardX;
+    public int getComputerPosition() {
+        return computerPosition;
+    }
+    public void setComputerPosition(int computerPosition) {
+        this.computerPosition = computerPosition;
+    }
+    public int getMaxPlayerPosition() {
+        return maxPlayerPosition;
+    }
+    public int getPlayerPosition() {
+        return playerPosition;
+    }
+    public void setPlayerPosition(int playerPosition) {
+        this.playerPosition = playerPosition;
     }
 
-    public void setBoardX(int boardX) {
-        this.boardX = boardX;
-    }
-
-    public void setFields(List<BoardField> fields) {
-        this.fields = fields;
-    }
-
-    public void setBlankFields(List<BoardField> blankFields) {
-        this.blankFields = blankFields;
-    }
     public void generateBlankFields() {
         BoardField bf1 = new BlankField(1, 0);
         BoardField bf2 = new BlankField(1, 1);
@@ -142,13 +115,11 @@ public class Board extends Pane {
         blankFields.add(bf33);
         blankFields.add(bf34);
     }
-
     public void generateStartField() {
         BoardField startField = new StartField(0, 0);
         fields.add(startField);
     }
     public void generatePlayableFields() {
-
         BoardField pf1 = new PlayableField(0, 1);
         BoardField pf2 = new PlayableField(0, 2);
         BoardField pf3 = new PlayableField(0, 3);
