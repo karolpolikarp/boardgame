@@ -1,8 +1,12 @@
 package application;
-import javafx.scene.paint.Color;
 public class Player {
-//
-//    private String playerName;
-//    private Color
-//    private String playerShape;
+
+    public String playerName;
+
+    public String getPlayerName() {
+        return playerName;
+    }
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 }

@@ -1,13 +1,11 @@
 package application.fields;
 
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.Text;
 
 
 public class BoardField extends Pane {
@@ -24,7 +22,6 @@ public class BoardField extends Pane {
     }
 
     public Paint color;
-//    private Paint originalColor;
     private boolean isUserOn = false;
     private boolean isComputerOn = false;
     public Shape shapeX;
@@ -46,7 +43,6 @@ public class BoardField extends Pane {
         shapeX.setStroke(Color.BLACK);
         shapeX.setStrokeType(StrokeType.OUTSIDE);
         shapeX.setStrokeWidth(1);
-        ///shapeY = new Text(); ///tile number lub 2x tiles na jednym
     }
 
     public Shape getShapeX() {
