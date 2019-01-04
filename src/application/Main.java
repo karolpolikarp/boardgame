@@ -1,6 +1,7 @@
 package application;
 
 import application.fields.BoardField;
+import application.fields.SpecialField;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -13,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
+
+import java.util.Random;
 
 
 public class Main extends Application {
@@ -78,24 +81,39 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
     private void diceSetter() {
+        Random random = new Random();
         diceRolled = dice.roll();
         computerRolled = dice.roll();
-        if (board.getPlayerPosition() <= board.getMaxPosition()) {
+        String message = "";
+        if ((board.getPlayerPosition() + diceRolled) < board.getMaxPosition()) {
             board.setPlayerPosition(board.getPlayerPosition() + diceRolled);
-        } else {
+            if (board.getFields().get(board.getPlayerPosition()) instanceof SpecialField) {
+                int rnd = random.nextInt(5) - 2;
+                board.setPlayerPosition(board.getPlayerPosition() + rnd);
+                message = "Player skipped " + rnd + " fields! ";
+            }
+        } else if ((board.getPlayerPosition() + diceRolled) == board.getMaxPosition()) {
             board.setPlayerPosition(48);
             end = true;
-        }
-        if (board.getComputerPosition() <= board.getMaxPosition()) {
-            board.setComputerPosition(board.getComputerPosition() + computerRolled);
         } else {
+            message = "Player amt to high! ";
+        }
+        if ((board.getComputerPosition() + computerRolled) < board.getMaxPosition()) {
+            board.setComputerPosition(board.getComputerPosition() + computerRolled);
+            if (board.getFields().get(board.getComputerPosition()) instanceof SpecialField) {
+                int rnd = random.nextInt(5) - 2;
+                board.setComputerPosition(board.getComputerPosition() + rnd);
+                message += "Computer skipped " + rnd + " fields!";
+            }
+        } else if ((board.getComputerPosition() + computerRolled) == board.getMaxPosition()) {
             board.setComputerPosition(48);
             end = true;
+        } else {
+            message += "Computer amt to high!";
         }
+        diceAmt.setText(message);
     }
-
     private void displayDiceRoll() {
         diceSetter();
         BorderPane border1 = new BorderPane();
@@ -116,10 +134,7 @@ public class Main extends Application {
         if (board.getComputerPosition() >= board.getMaxPosition() && board.getPlayerPosition() >= board.getMaxPosition()){
             diceAmt.setText("Wow, it's a draw!");
         }
-        System.out.println("You've rolled a " + diceRolled + ".");
-        System.out.println("Computer rolled a " + computerRolled + ".");
     }
-
     private void boardRepaint() {
         board.getFields().clear();
         board.getBlankFields().clear();
@@ -131,7 +146,6 @@ public class Main extends Application {
         results.getChildren().addAll(grid, hbox1);
         displayPlayers();
     }
-
     private void fieldsGenerator() {
         backgroundBoard.generateBackgroundBoard();
         board.generateBoard();
@@ -168,7 +182,7 @@ public class Main extends Application {
         Label playerLabel = new Label("Indicates player's position on board ");
         Label computerLabel = new Label("Indicates computer's position on board ");
         Label twoPlayersLabel = new Label("Indicates player's and computer's position" + "\n" + "on board in case they are on the same field");
-        Label specialTileLabel = new Label("These are special fields, rolling onto these" + "\n" + "will either take you up to 3 fields behind or forward");
+        Label specialTileLabel = new Label("These are special fields, rolling onto these" + "\n" + "will either take you up to 2 fields behind or forward");
         Label blankTileLabel = new Label("These are unreachable blank tiles");
         Label generalRulesLabel = new Label("Basically the purpose of this game is to reach" + "\n" + "the last field (colored RED) before your opponent does so." + "\n" + "Use the ROLL button located underneath the board" + "\n" + "to roll the dice and move your player.");
 
