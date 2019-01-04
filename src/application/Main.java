@@ -111,7 +111,7 @@ public class Main extends Application {
             diceAmt.setText("Congratulations, you've won!");
         }
         if (board.getComputerPosition() >= board.getMaxPosition()) {
-            diceAmt.setText("Computer won, good luck next time!");
+            diceAmt.setText("Computer won," + "\n" + "good luck next time!");
         }
         if (board.getComputerPosition() >= board.getMaxPosition() && board.getPlayerPosition() >= board.getMaxPosition()){
             diceAmt.setText("Wow, it's a draw!");
@@ -137,8 +137,6 @@ public class Main extends Application {
         board.generateBoard();
         board.getFields().get(board.getPlayerPosition()).setUserOn(true);
         board.getFields().get(board.getComputerPosition()).setComputerOn(true);
-        System.out.println(board.getFields());
-        System.out.println(backgroundBoard.getBackgroundFields());
         for (BoardField backgroundFields : backgroundBoard.getBackgroundFields()) {
             grid.add(backgroundFields.getShapeX(), backgroundFields.getX(), backgroundFields.getY());
         }
@@ -152,7 +150,6 @@ public class Main extends Application {
             grid.add(fields.getShapeY(), fields.getX(), fields.getY());
         }
     }
-
     private void displayPlayers() {
         board.getFields().get(board.getPlayerPosition()).setUserOn(true);
         board.getFields().get(board.getComputerPosition()).setComputerOn(true);
@@ -167,7 +164,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
     private void displayRules() {
         Label playerLabel = new Label("Indicates player's position on board ");
         Label computerLabel = new Label("Indicates computer's position on board ");
@@ -211,10 +207,10 @@ public class Main extends Application {
         rulesLayout.setTopAnchor(generalRulesLabel,285.0);
         rulesLayout.setLeftAnchor(generalRulesLabel,27.5);
 
-        Scene secondScene = new Scene(rulesLayout, 350, 350);
+        Scene secondScene = new Scene(rulesLayout, 400, 360);
 
         Stage rulesWindow = new Stage();
-        rulesWindow.setTitle("Rules");
+        rulesWindow.setTitle("Rules - Roll and move!");
         rulesWindow.setScene(secondScene);
         rulesWindow.initModality(Modality.WINDOW_MODAL);
         rulesWindow.initOwner(stage);
