@@ -81,23 +81,23 @@ public class BoardField extends Pane {
     public void setUserOn(boolean userOn) {
         isUserOn = userOn;
         if (isUserOn) {
-            shapeY = new Circle(25, Color.BLACK);
+            shapeY = new Circle(25, Color.BLUE);
         }else{
             shapeY = null;
         }
         if (isComputerOn) {
-            shapeY = new Rectangle(25, 25, Color.RED);
+            shapeY = new Circle(25, Color.GREEN);
         }
     }
     public void setComputerOn(boolean computerOn) {
         isComputerOn = computerOn;
         if (isComputerOn) {
-            shapeY = new Circle(25, Color.YELLOWGREEN);
+            shapeY = new Circle(25, Color.YELLOW);
         }else{
             shapeY = null;
         }
         if (isUserOn) {
-            shapeY = new Rectangle(25, 25, Color.RED);
+            shapeY = new Circle(25,Color.YELLOWGREEN);
         }
     }
 

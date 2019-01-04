@@ -5,7 +5,6 @@ import javafx.scene.layout.Pane;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class Board extends Pane {
 
@@ -233,9 +232,9 @@ public class Board extends Pane {
         BoardField sp3 = new SpecialField(2,7);
         BoardField sp4 = new SpecialField(4,0);
         BoardField sp5 = new SpecialField(4,4);
-        BoardField sp6 = new SpecialField(6,2);
-        BoardField sp7 = new SpecialField(6,6);
-        BoardField sp8 = new SpecialField(8,2);
+        BoardField sp6 = new SpecialField(6,3);
+        BoardField sp7 = new SpecialField(6,7);
+        BoardField sp8 = new SpecialField(8,1);
         BoardField sp9 = new SpecialField(8,5);
 
         fields.set(4, sp1);
