@@ -5,6 +5,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class Board extends Pane {
 
@@ -13,31 +14,30 @@ public class Board extends Pane {
 
     private int playerPosition = 0;
     private int computerPosition = 0;
-    private int maxPlayerPosition = 48;
+    private int maxPosition = 48;
 
     public List<BoardField> fields = new LinkedList<>();
     public List<BoardField> blankFields = new LinkedList<>();
 
-    public List<BoardField> getBackgroundFields() {
-        return blankFields;
-    }
     public List<BoardField> getBlankFields() {
         return blankFields;
     }
     public List<BoardField> getFields() {
         return fields;
     }
-    public int getComputerPosition() {
-        return computerPosition;
-    }
-    public void setComputerPosition(int computerPosition) {
-        this.computerPosition = computerPosition;
-    }
-    public int getMaxPlayerPosition() {
-        return maxPlayerPosition;
+
+    public int getMaxPosition() {
+        return maxPosition;
     }
     public int getPlayerPosition() {
         return playerPosition;
+    }
+    public int getComputerPosition() {
+        return computerPosition;
+    }
+
+    public void setComputerPosition(int computerPosition) {
+        this.computerPosition = computerPosition;
     }
     public void setPlayerPosition(int playerPosition) {
         this.playerPosition = playerPosition;
@@ -227,15 +227,43 @@ public class Board extends Pane {
         fields.add(pf46);
         fields.add(pf47);
     }
+    public void generateSpecialFields() {
+        BoardField sp1 = new SpecialField(0,4);
+        BoardField sp2 = new SpecialField(2,3);
+        BoardField sp3 = new SpecialField(2,7);
+        BoardField sp4 = new SpecialField(4,0);
+        BoardField sp5 = new SpecialField(4,4);
+        BoardField sp6 = new SpecialField(6,2);
+        BoardField sp7 = new SpecialField(6,6);
+        BoardField sp8 = new SpecialField(8,2);
+        BoardField sp9 = new SpecialField(8,5);
+
+        fields.set(4, sp1);
+        fields.set(15, sp2);
+        fields.set(11, sp3);
+        fields.set(20, sp4);
+        fields.set(24, sp5);
+        fields.set(36, sp6);
+        fields.set(32, sp7);
+        fields.set(42, sp8);
+        fields.set(45, sp9);
+
+    }
     public void generateFinishField() {
         BoardField finishField = new FinishField(8, 8);
         fields.add(finishField);
     }
+
     public void generateBoard(){
         generateBlankFields();
         generateStartField();
         generatePlayableFields();
+        generateSpecialFields();
         generateFinishField();
+    }
+    public void ng(){
+        setComputerPosition(0);
+        setPlayerPosition(0);
     }
 }
 

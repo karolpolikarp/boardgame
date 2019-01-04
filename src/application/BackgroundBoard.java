@@ -1,19 +1,16 @@
 package application;
 
-import application.fields.BackgroundField;
-import application.fields.BoardField;
-import application.fields.FinishField;
-import application.fields.StartField;
+import application.fields.*;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class BackgroundBoard extends Board {
-    @Override
+
+    private List<BoardField> backgroundFields = new LinkedList<>();
     public List<BoardField> getBackgroundFields() {
         return backgroundFields;
     }
-    private List<BoardField> backgroundFields = new LinkedList<>();
 
     public int boardX = 9;
     public int boardY = 9;

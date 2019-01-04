@@ -28,6 +28,7 @@ public class Main extends Application {
     private VBox results;
     private HBox hbox1;
     private int diceRolled;
+    private int computerRolled;
     Dice dice = new Dice(6);
 
     public static void main(String[] args) {
@@ -48,13 +49,21 @@ public class Main extends Application {
         });
 
         setGame = new Button();
-        setGame.setText("SET GAME");
+        setGame.setText("RULES");
         setGame.setOnAction(e -> {
         });
 
         newGame = new Button();
         newGame.setText("NEW GAME");
         newGame.setOnAction(e -> {
+            BorderPane border1 = new BorderPane();
+            results = new VBox(10);
+            border1.setCenter(results);
+            board.ng();
+            boardRepaint();
+            Scene scene = new Scene(border1, (board.boardX * 50 + board.boardY * 2), 525);
+            primaryStage.setScene(scene);
+            primaryStage.show();
         });
 
         diceAmt = new Label();
@@ -76,13 +85,14 @@ public class Main extends Application {
     }
     private void diceSetter() {
         diceRolled = dice.roll();
-        if (board.getPlayerPosition() < board.getMaxPlayerPosition()) {
+        computerRolled = dice.roll();
+        if (board.getPlayerPosition() < board.getMaxPosition()) {
             board.setPlayerPosition(board.getPlayerPosition() + diceRolled);
         } else {
             board.setPlayerPosition(48);
         }
-        if (board.getComputerPosition() < board.getMaxPlayerPosition()) {
-            board.setComputerPosition(board.getComputerPosition() + dice.roll());
+        if (board.getComputerPosition() < board.getMaxPosition()) {
+            board.setComputerPosition(board.getComputerPosition() + computerRolled);
         } else {
             board.setComputerPosition(48);
         }
@@ -97,12 +107,13 @@ public class Main extends Application {
 
         stage.setScene(ns1);
         stage.show();
-        diceAmt.setText("You've rolled a " + diceRolled);
+        diceAmt.setText("You've rolled a " + diceRolled + "." + "\n" + "Computer rolled a " + computerRolled + ".");
         System.out.println("You've rolled a " + diceRolled + ".");
+        System.out.println("Computer rolled a " + computerRolled + ".");
     }
     private void boardRepaint() {
         board.getFields().clear();
-        board.getBackgroundFields().clear();
+        board.getBlankFields().clear();
         backgroundBoard.getBackgroundFields().clear();
         board.getBlankFields().clear();
 
@@ -115,7 +126,7 @@ public class Main extends Application {
         backgroundBoard.generateBackgroundBoard();
         board.generateBoard();
         board.getFields().get(board.getPlayerPosition()).setUserOn(true);
-        board.getFields().get(board.getComputerPosition()).setUserOn(true);
+        board.getFields().get(board.getComputerPosition()).setComputerOn(true);
         System.out.println(board.getFields());
         System.out.println(backgroundBoard.getBackgroundFields());
         for (BoardField backgroundFields : backgroundBoard.getBackgroundFields()) {
@@ -127,12 +138,12 @@ public class Main extends Application {
         for (BoardField blankFields : board.getBlankFields()) {
             grid.add(blankFields.getShapeX(), blankFields.getX(), blankFields.getY());
         }
-//        for (BoardField fields :board.getFields()){
-//            grid.add(fields.getShapeY(), fields.getX(), fields.getY());
-//        } wyswietlanie figury Y na polu (np. napis lub inny kształt)
+        for (BoardField fields : board.getFields()) {
+            grid.add(fields.getShapeY(), fields.getX(), fields.getY());
+        }
     }
     private void displayPlayers(){
         board.getFields().get(board.getPlayerPosition()).setUserOn(true);
-        board.getFields().get(board.getComputerPosition()).setUserOn(true);
+        board.getFields().get(board.getComputerPosition()).setComputerOn(true);
     }
 }

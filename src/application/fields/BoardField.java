@@ -26,6 +26,7 @@ public class BoardField extends Pane {
     public Paint color;
 //    private Paint originalColor;
     private boolean isUserOn = false;
+    private boolean isComputerOn = false;
     public Shape shapeX;
     public Shape shapeY;
 
@@ -39,7 +40,8 @@ public class BoardField extends Pane {
         this.color = color;
         this.shapeX = shapeX;
         this.shapeY = shapeY;
-        shapeX = new Rectangle(50, 50);
+        shapeX = new Rectangle(50, 50, Color.TRANSPARENT);
+        shapeY = new Rectangle(50,50, Color.TRANSPARENT);
         shapeX.setFill(color);
         shapeX.setStroke(Color.BLACK);
         shapeX.setStrokeType(StrokeType.OUTSIDE);
@@ -67,15 +69,36 @@ public class BoardField extends Pane {
                 ", color=" + color +
                 '}';
     }
+
+    public boolean isUserOn() {
+        return isUserOn;
+    }
+
+    public boolean isComputerOn() {
+        return isComputerOn;
+    }
+
     public void setUserOn(boolean userOn) {
         isUserOn = userOn;
         if (isUserOn) {
-            shapeX = new Circle(25, Color.BLACK);
-            ///shapeY = new Text("yooy");
+            shapeY = new Circle(25, Color.BLACK);
         }else{
-            shapeX = new Rectangle(50, 50);
+            shapeY = null;
+        }
+        if (isComputerOn) {
+            shapeY = new Rectangle(25, 25, Color.RED);
         }
     }
-
+    public void setComputerOn(boolean computerOn) {
+        isComputerOn = computerOn;
+        if (isComputerOn) {
+            shapeY = new Circle(25, Color.YELLOWGREEN);
+        }else{
+            shapeY = null;
+        }
+        if (isUserOn) {
+            shapeY = new Rectangle(25, 25, Color.RED);
+        }
+    }
 
 }
