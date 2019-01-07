@@ -4,16 +4,9 @@ import application.Board;
 import javafx.scene.paint.Color;
 
 public class SpecialField extends BoardField {
-    Board board;
     public SpecialField(int x, int y) {
         super(x, y);
-        color = Color.PURPLE;
+        color = Color.HOTPINK;
         shapeX.setFill(color);
-        if (isUserOn()) {
-            board.setPlayerPosition(board.getPlayerPosition() + 2);
-        }
-        if (isComputerOn()) {
-            board.setComputerPosition(board.getComputerPosition() + 2);
-        }
     }
 }

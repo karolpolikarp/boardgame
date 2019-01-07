@@ -1,7 +1,6 @@
 package application;
 
 import application.fields.*;
-
 import java.util.LinkedList;
 import java.util.List;
 

@@ -252,7 +252,6 @@ public class Board extends Pane {
         BoardField finishField = new FinishField(8, 8);
         fields.add(finishField);
     }
-
     public void generateBoard(){
         generateBlankFields();
         generateStartField();
@@ -260,7 +259,7 @@ public class Board extends Pane {
         generateSpecialFields();
         generateFinishField();
     }
-    public void ng(){
+    public void resetPositions(){
         setComputerPosition(0);
         setPlayerPosition(0);
     }

@@ -7,19 +7,10 @@ import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-
 public class BoardField extends Pane {
 
     public int x;
     public int y;
-
-    public Paint getColor() {
-        return color;
-    }
-
-    public void setColor(Paint color) {
-        this.color = color;
-    }
 
     public Paint color;
     private boolean isUserOn = false;
@@ -34,9 +25,6 @@ public class BoardField extends Pane {
     public BoardField(int x, int y) {
         this.x = x;
         this.y = y;
-        this.color = color;
-        this.shapeX = shapeX;
-        this.shapeY = shapeY;
         shapeX = new Rectangle(50, 50, Color.TRANSPARENT);
         shapeY = new Rectangle(50,50, Color.TRANSPARENT);
         shapeX.setFill(color);
